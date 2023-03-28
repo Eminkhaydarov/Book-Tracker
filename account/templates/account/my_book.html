@@ -1,0 +1,180 @@
+{% extends 'account/base.html' %} {% load account_tags %}
+
+
+    {% block content %}
+    <div class="container my-5">
+        <h2 class="text-decoration-none my-5">Favorites</h2>
+        <div class="row row-col-1 row-col-md-2 row-col-lg-3">
+            {% if favorites %} {% for user_book in favorites %}
+            <div class="col">
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img
+                                    src="{{user_book.book.thumbnail}}"
+                                    class="img-fluid rounded-start"
+                                    alt="..."
+                            />
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ user_book.book.title }}</h5>
+                                <p class="card-text text-muted">
+                                    {{ user_book.book.author }}
+                                {{ user_book.book.publishedDate }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <a href="/favorites" class="text-decoration-none link-dark"
+            >Посмотреть все</a
+            >
+
+            {% else %}
+<div class="col">
+  <div class="card">
+      <div class="card-body">
+          <p class="card-text">No books in this bookshelf yet.</p>
+          <a href="#" class="btn btn-dark">Add book</a>
+      </div>
+  </div>
+</div>
+
+    {% endif %}
+</div>
+</div>
+    <div class="container my-5">
+        <h2 class="text-decoration-none my-5">Reading now</h2>
+        <div class="row row-col-1 row-col-md-2 row-col-lg-3">
+            {% if reading_now %} {% for user_book in reading_now %}
+            <div class="col">
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img
+                                    src="{{user_book.book.thumbnail}}"
+                                    class="img-fluid rounded-start"
+                                    alt="..."
+                            />
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ user_book.book.title }}</h5>
+                                 <p class="card-text text-muted">
+                                    {{ user_book.book.author }}
+                                {{ user_book.book.publishedDate }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <a href="#" class="text-decoration-none link-dark"
+            >Посмотреть все</a
+            >
+
+            {% else %}
+<div class="col">
+  <div class="card">
+      <div class="card-body">
+          <p class="card-text">No books in this bookshelf yet.</p>
+          <a href="#" class="btn btn-dark">Add book</a>
+      </div>
+  </div>
+</div>
+
+    {% endif %}
+</div>
+</div>
+    <div class="container my-5">
+        <h2 class="text-decoration-none my-5">To read</h2>
+        <div class="row row-col-1 row-col-md-2 row-col-lg-3">
+            {% if to_read %} {% for user_book in to_read %}
+            <div class="col">
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img
+                                    src="{{user_book.book.thumbnail}}"
+                                    class="img-fluid rounded-start"
+                                    alt="..."
+                            />
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ user_book.book.title }}</h5>
+                                 <p class="card-text text-muted">
+                                    {{ user_book.book.author }}
+                                {{ user_book.book.publishedDate }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <a href="#" class="text-decoration-none link-dark"
+            >Посмотреть все</a
+            >
+    {% else %}
+<div class="col">
+  <div class="card">
+      <div class="card-body">
+          <p class="card-text">No books in this bookshelf yet.</p>
+          <a href="#" class="btn btn-dark">Add book</a>
+      </div>
+  </div>
+</div>
+
+
+    {% endif %}
+</div>
+</div>
+    <div class="container my-5">
+        <h2 class="text-decoration-none my-5">Have read</h2>
+        <div class="row row-col-1 row-col-md-2 row-col-lg-3">
+            {% if have_read %} {% for user_book in have_read %}
+            <div class="col">
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img
+                                    src="{{user_book.book.thumbnail}}"
+                                    class="img-fluid rounded-start"
+                                    alt="..."
+                            />
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ user_book.book.title }}</h5>
+                                 <p class="card-text text-muted">
+                                    {{ user_book.book.author }}
+                                {{ user_book.book.publishedDate }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <a href="{% url 'have_read' %}" class="text-decoration-none link-dark"
+            >Посмотреть все</a
+            >
+
+
+        {% else %}
+<div class="col">
+  <div class="card">
+      <div class="card-body">
+          <p class="card-text">No books in this bookshelf yet.</p>
+          <a href="#" class="btn btn-dark">Add book</a>
+      </div>
+  </div>
+</div>
+
+{% endif %}
+</div>
+</div>
+{% endblock %}
+
+
