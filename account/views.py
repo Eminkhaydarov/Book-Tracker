@@ -6,7 +6,7 @@ from account.models import *
 from account.utils import SideBarMixin
 
 
-class MyBook(ListView, LoginRequiredMixin, SideBarMixin):
+class MyBook(LoginRequiredMixin, ListView, SideBarMixin):
     model = UserBookList
     template_name = 'account/my_book.html'
     context_object_name = 'favorites'
@@ -28,7 +28,7 @@ class MyBook(ListView, LoginRequiredMixin, SideBarMixin):
         return UserBookList.objects.select_related('book').filter(user=self.request.user.id, favorites=True)[:4]
 
 
-class FavoritesBook(ListView, LoginRequiredMixin, SideBarMixin):
+class FavoritesBook(LoginRequiredMixin, ListView, SideBarMixin):
     model = UserBookList
     template_name = 'account/sorted_book.html'
     context_object_name = 'sorted_book'
@@ -43,7 +43,7 @@ class FavoritesBook(ListView, LoginRequiredMixin, SideBarMixin):
         return UserBookList.objects.select_related('book').filter(user=self.request.user.id, favorites=True)
 
 
-class SortedByStatusBook(ListView, LoginRequiredMixin, SideBarMixin):
+class SortedByStatusBook(LoginRequiredMixin, ListView, SideBarMixin):
     model = UserBookList
     template_name = 'account/sorted_book.html'
     context_object_name = 'sorted_book'

@@ -52,21 +52,12 @@
                     <a href="/add_book" class="nav-link px-12 fs-4 text-white">Add book</a>
                 </li>
             </ul>
-            {% if request.user.is_authenticated %}
             <div class="text-end">
-                <button type="button" class="btn btn btn-outline-warning me-2">
+                <a href="" class="btn btn-outline-light me-2 disabled text-white">
                     {{user.username}}
-                </button>
-                <button type="button" class="btn btn-warning">Logout</button>
+                </a>
+                <a href="{% url 'logout' %}" class="btn btn-warning">Log out</a>
             </div>
-            {% else %}
-            <div class="text-end">
-                <button type="button" class="btn btn-outline-light me-2">
-                    Login
-                </button>
-                <button type="button" class="btn btn-warning">Sign-up</button>
-            </div>
-            {% endif %}
         </div>
     </div>
 </header>
