@@ -75,19 +75,51 @@
     <div class="row">
         <div class="col-2 border-end">
             <ul class="nav box-shadow nav-pills flex-column sidebar my-5 fs-5">
-                {% for s in side_bar %}
-                {% if request|is_current_page:s.slug %}
+                {% if request|is_current_page:'/' %}
                 <li class="nav-item">
                     <a
                             class="nav-link disabled bg-dark text-white"
                             aria-current="page"
-                            href="{{s.slug}}"
+                            href="{% url 'home' %}"
+                    >My book</a
+                    >
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link text-decoration-none link-dark" href="{% url 'home' %}"
+                    >My book</a
+                    >
+                </li>
+                {% endif %}
+                {% if request|is_current_page:'/status/favorites' %}
+                <li class="nav-item">
+                    <a
+                            class="nav-link disabled bg-dark text-white"
+                            aria-current="page"
+                            href="{% url 'favorites' %}"
+                    >Favorites</a
+                    >
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link text-decoration-none link-dark" href="{% url 'favorites' %}"
+                    >Favorites</a
+                    >
+                </li>
+                {% endif %}
+                {% for s in side_bar %}
+                {% if s.pk == status_selected %}
+                <li class="nav-item">
+                    <a
+                            class="nav-link disabled bg-dark text-white"
+                            aria-current="page"
+                            href="{{ s.get_absolute_url }}"
                     >{{ s.status_name }}</a
                     >
                 </li>
                 {% else %}
                 <li class="nav-item">
-                    <a class="nav-link text-decoration-none link-dark" href="{{s.slug}}"
+                    <a class="nav-link text-decoration-none link-dark" href="{{ s.get_absolute_url }}"
                     > {{ s.status_name }} </a
                     >
                 </li>

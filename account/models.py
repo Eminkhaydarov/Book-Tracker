@@ -37,5 +37,5 @@ class BookStatus(models.Model):
         return self.status_name
 
     def get_absolute_url(self):
-        return reverse('bookstatus', kwargs={'status_slug': self.slug})
+        return reverse('status', kwargs={'status_slug': self.slug})
 

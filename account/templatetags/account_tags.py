@@ -6,4 +6,4 @@ register = template.Library()
 
 @register.filter
 def is_current_page(request, param):
-    return request.path[1:] == param
+    return request.path == param
