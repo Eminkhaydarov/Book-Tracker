@@ -1,12 +1,10 @@
 {% extends 'account/base.html' %}
 
-
 {% block content %}
+
 <div class="container my-5">
-    <h2 class="text-decoration-none my-5">{{ title }}</h2>
     <div class="row row-col-1 row-col-md-2 row-col-lg-3">
-        {% if sorted_book %} {% for user_book in sorted_book %}
-        <div class="col">
+        <div class="col py-5">
             <div class="card mb-3">
                 <div class="row g-0">
                     <div class="col-md-4">
@@ -20,24 +18,22 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ user_book.book.title }}</h5>
                             <p class="card-text text-muted">
-                                {{ user_book.book.author }}
-                                {{ user_book.book.publishedDate }}</p>
-                            <a href="{{ user_book.book.get_absolute_url }}" class="btn btn-dark">More</a>
+                                {{ user_book.book.author }} {{ user_book.book.publishedDate }}
+                            </p>
+
+                            <h6 class="card-title">Status:</h6>
+                            <p class="card-text">{{ user_book.status }}</p>
+
+                            <h6 class="card-title">Review:</h6>
+                            <p class="card-text">{{user_book.review|linebreaks}}</p>
+                            {% if user_book.favorites %}
+                            <h6 class="card-title">In favorites list</h6>
+                            {% endif %}
+                            <a class="btn btn-dark" href="{% url 'update_book' user_book.book.slug %}">Change</a>
+                            <a class="btn btn-danger" href="{% url 'delete' user_book.book.slug %}">Delete</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        {% endfor %}
-        {% else %}
-        <div class="col">
-            <div class="card">
-                <div class="card-body">
-                    <p class="card-text">No books in this bookshelf yet.</p>
-                    <a href="#" class="btn btn-dark">Add book</a>
-                </div>
-            </div>
-        </div>
-
-        {% endif %}
         {% endblock %}

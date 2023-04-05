@@ -14,19 +14,16 @@ class Book(models.Model):
     publishedDate = models.DateField()
     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
 
+
+    def __str__(self):
+        return self.title
+
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super(Book, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse('book', kwargs={'book_slug': self.slug})
-
-class UserBookList(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    book = models.ForeignKey('Book', on_delete=models.PROTECT)
-    review = models.TextField(blank=True)
-    favorites = models.BooleanField(default=False)
-    status = models.ForeignKey('BookStatus', on_delete=models.PROTECT)
 
 
 class BookStatus(models.Model):
@@ -39,3 +36,10 @@ class BookStatus(models.Model):
     def get_absolute_url(self):
         return reverse('status', kwargs={'status_slug': self.slug})
 
+
+class UserBookList(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    review = models.TextField(blank=True)
+    favorites = models.BooleanField(default=False)
+    status = models.ForeignKey(BookStatus, on_delete=models.PROTECT)

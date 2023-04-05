@@ -29,7 +29,7 @@
             </div>
             {% endfor %}
             <a href="{% url 'favorites' %}" class="text-decoration-none link-dark"
-            >Посмотреть все</a
+            >View all</a
             >
 
             {% else %}
@@ -37,7 +37,7 @@
   <div class="card">
       <div class="card-body">
           <p class="card-text">No books in this bookshelf yet.</p>
-          <a href="#" class="btn btn-dark">Add book</a>
+          <a href="{% url 'add_book' %}" class="btn btn-dark">Add book</a>
       </div>
   </div>
 </div>
@@ -71,8 +71,8 @@
                 </div>
             </div>
             {% endfor %}
-            <a href="#" class="text-decoration-none link-dark"
-            >Посмотреть все</a
+            <a href="status/reading_now" class="text-decoration-none link-dark"
+            >View all</a
             >
 
             {% else %}
@@ -114,8 +114,8 @@
                 </div>
             </div>
             {% endfor %}
-            <a href="#" class="text-decoration-none link-dark"
-            >Посмотреть все</a
+            <a href="status/to_read" class="text-decoration-none link-dark"
+            >View all</a
             >
     {% else %}
 <div class="col">
@@ -157,8 +157,8 @@
                 </div>
             </div>
             {% endfor %}
-            <a href="{% url 'have_read' %}" class="text-decoration-none link-dark"
-            >Посмотреть все</a
+            <a href="status/have_read" class="text-decoration-none link-dark"
+            >View all</a
             >
 
 
