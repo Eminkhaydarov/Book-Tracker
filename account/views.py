@@ -32,7 +32,7 @@ class MyBook(LoginRequiredMixin, ListView, SideBarMixin):
         return UserBookList.objects.select_related('book').filter(user=self.request.user.id, favorites=True)[:4]
 
 
-class FavoritesBook(LoginRequiredMixin, ListView, SideBarMixin):
+class FavoritesBookView(LoginRequiredMixin, ListView, SideBarMixin):
     model = UserBookList
     template_name = 'account/sorted_book.html'
     context_object_name = 'sorted_book'
@@ -47,7 +47,7 @@ class FavoritesBook(LoginRequiredMixin, ListView, SideBarMixin):
         return UserBookList.objects.select_related('book').filter(user=self.request.user.id, favorites=True)
 
 
-class SortedByStatusBook(LoginRequiredMixin, ListView, SideBarMixin):
+class SortedByStatusBookView(LoginRequiredMixin, ListView, SideBarMixin):
     model = UserBookList
     template_name = 'account/sorted_book.html'
     context_object_name = 'sorted_book'
@@ -66,6 +66,7 @@ class SortedByStatusBook(LoginRequiredMixin, ListView, SideBarMixin):
 
 
 def add_book(request):
+    """View for create Book model and UserBookList model"""
     book_form = BookForm()
     user_book_list_form = BookListForm()
     if request.method == "POST":
@@ -79,8 +80,8 @@ def add_book(request):
             list_form.save()
             user_book_list_form.save_m2m()
             return redirect("/")
-    context = {'book_form': book_form, 'user_book_list_form': user_book_list_form}
-    context['side_bar'] = BookStatus.objects.annotate(Count('userbooklist'))
+    context = {'book_form': book_form, 'user_book_list_form': user_book_list_form,
+               'side_bar': BookStatus.objects.annotate(Count('userbooklist'))}
     return render(request, 'account/addbook.html', context)
 
 
@@ -113,7 +114,8 @@ class DeleteBookView(DeleteView, SideBarMixin):
         return context
 
 
-def update_book(request, slug):
+def update_book(request, slug: str):
+    """View for updating Book model and UserBookList model"""
     book = Book.objects.get(slug=slug)
     user_list = UserBookList.objects.get(book=book.id)
     user_book_list_form = BookListForm(instance=user_list)

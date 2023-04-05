@@ -6,12 +6,12 @@ from django.urls import reverse_lazy
 # Create your views here.
 from django.views.generic import CreateView
 
-from auth_and_reg.forms import LoginUserForm, RegisterUserForm
+from user.forms import LoginUserForm, RegisterUserForm
 
 
 class LoginUser(LoginView):
     form_class = LoginUserForm
-    template_name = 'auth_and_reg/login.html'
+    template_name = 'user/login.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -29,7 +29,7 @@ def logout_user(request):
 
 class RegisterUser(CreateView):
     form_class = RegisterUserForm
-    template_name = 'auth_and_reg/login.html'
+    template_name = 'user/login.html'
     success_url = reverse_lazy('login')
 
     def get_context_data(self, **kwargs):

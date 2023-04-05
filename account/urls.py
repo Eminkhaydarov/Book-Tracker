@@ -4,8 +4,8 @@ from account.views import *
 
 urlpatterns = [
     path('', MyBook.as_view(), name='home'),
-    path('status/favorites', FavoritesBook.as_view(), name='favorites'),
-    path('status/<slug:status_slug>/', SortedByStatusBook.as_view(), name='status'),
+    path('status/favorites', FavoritesBookView.as_view(), name='favorites'),
+    path('status/<slug:status_slug>/', SortedByStatusBookView.as_view(), name='status'),
     path('add_book', add_book, name='add_book'),
     path('book/<slug:book_slug>/', BookView.as_view(), name='book'),
     path('delete_book/<slug:slug>/', DeleteBookView.as_view(), name='delete'),
