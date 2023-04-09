@@ -20,6 +20,9 @@ class BookForm(forms.ModelForm):
 
 
 class BookListForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['status'].empty_label = None
     class Meta:
         model = UserBookList
         fields = ['review', 'favorites', 'status']

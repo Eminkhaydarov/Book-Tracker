@@ -1,0 +1,1 @@
+[{"model": "account.bookstatus", "pk": 1, "fields": {"status_name": "To read", "slug": "to_read"}}, {"model": "account.bookstatus", "pk": 2, "fields": {"status_name": "Have read", "slug": "have_read"}}, {"model": "account.bookstatus", "pk": 3, "fields": {"status_name": "Reading now", "slug": "reading_now"}}]

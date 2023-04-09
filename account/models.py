@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
@@ -11,9 +12,8 @@ class Book(models.Model):
     title = models.CharField(max_length=255)
     author = models.CharField(max_length=255)
     thumbnail = models.URLField()
-    publishedDate = models.DateField()
+    publishedDate = models.PositiveSmallIntegerField()
     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
-
 
     def __str__(self):
         return self.title
@@ -30,6 +30,11 @@ class BookStatus(models.Model):
     status_name = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
 
+    def save(self, *args, **kwargs):
+        if BookStatus.objects.count() < 3:
+            super().save(*args, **kwargs)
+
+
     def __str__(self):
         return self.status_name
 
@@ -42,4 +47,4 @@ class UserBookList(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     review = models.TextField(blank=True)
     favorites = models.BooleanField(default=False)
-    status = models.ForeignKey(BookStatus, on_delete=models.PROTECT)
+    status = models.ForeignKey(BookStatus, on_delete=models.PROTECT, blank=False)
